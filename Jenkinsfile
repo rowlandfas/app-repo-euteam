@@ -81,7 +81,7 @@ pipeline{
         stage('Deploy to stage') {
             steps {
                 sshagent(['ansible-key']) {
-                    sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/deployment.yml'" '''
+                    sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/stage_hosts /etc/ansible/deployment.yml'" '''
                     //sh 'ssh -t -o StrictHostKeyChecking=no -J ec2-user@$BASTION_HOST ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/stage_hosts /etc/ansible/deployment.yml"'
                 }
             }
@@ -110,7 +110,7 @@ pipeline{
         stage('Deploy to prod') {
             steps {
                 sshagent(['ansible-key']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -J ec2-user@$BASTION_HOST ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/prod_hosts /etc/ansible/deployment.yml"'
+                    sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/prod_hosts /etc/ansible/deployment.yml'" '''
                 }
             }
         }
