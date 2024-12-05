@@ -24,7 +24,7 @@ pipeline{
         }
         stage('Dependency Check') {
             steps {
-                dependencyCheck additionalArguments: '--format HTML', nvdCredentialsId: 'nvd-key', odcInstallation: 'DP-Check'
+                dependencyCheck additionalArguments: '--format HTML --format XML', nvdCredentialsId: 'nvd-key', odcInstallation: 'DP-Check'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
