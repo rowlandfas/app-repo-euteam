@@ -78,6 +78,11 @@ pipeline{
                 sh "trivy image $NEXUS_REPO/myapp > trivyfs.txt"
             }
         }
+        stage('Delete image from jenkins server') {
+            steps {
+                sh 'docker rmi $NEXUS_REPO/myapp'
+            }
+        }
         stage('Deploy to stage') {
             steps {
                 sshagent(['ansible-key']) {
