@@ -40,7 +40,7 @@ pipeline{
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $NEXUS_REPO/petclinicapps .'
+                sh 'docker build -t $NEXUS_REPO/myapp .'
             }
         }
         stage('Push Artifact to Nexus Repo') {
@@ -70,12 +70,12 @@ pipeline{
         }
         stage('Push to Nexus Docker Repo') {
             steps {
-                sh 'docker push $NEXUS_REPO/petclinicapps'
+                sh 'docker push $NEXUS_REPO/myapp'
             }
         }
         stage('Trivy image Scan') {
             steps {
-                sh "trivy image $NEXUS_REPO/petclinicapps > trivyfs.txt"
+                sh "trivy image $NEXUS_REPO/myapp > trivyfs.txt"
             }
         }
         stage('Deploy to stage') {
