@@ -87,10 +87,10 @@ pipeline{
             steps {
                 sshagent(['ansible-key']) {
                     sh '''
-                      ssh -t -t -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST" ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/stage-playbook.yml"
+                      ssh -t -t -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST" ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/production-playbook.yml"
                     '''
-                    //sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/stage-playbook.yml'" '''
-                    //sh 'ssh -t -o StrictHostKeyChecking=no -J ec2-user@$BASTION_HOST ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/stage-playbook.yml"'
+                    //sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/production-playbook.yml'" '''
+                    //sh 'ssh -t -o StrictHostKeyChecking=no -J ec2-user@$BASTION_HOST ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/stage-hosts /etc/ansible/production-playbook.yml"'
                 }
             }
         }
@@ -119,9 +119,9 @@ pipeline{
             steps {
                 sshagent(['ansible-key']) {
                     sh '''
-                      ssh -t -t -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST" ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/prod-hosts /etc/ansible/prod-playbook.yml"
+                      ssh -t -t -o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST" ec2-user@$ANSIBLE_HOST "ansible-playbook -i /etc/ansible/prod-hosts /etc/ansible/production-playbook.yml"
                     '''
-                    //sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/prod-hosts /etc/ansible/prod-playbook.yml'" '''
+                    //sh '''ssh -t -o StrictHostKeyChecking=no ec2-user@$BASTION_HOST "ssh -o StrictHostKeyChecking=no ec2-user@$ANSIBLE_HOST 'ansible-playbook -i /etc/ansible/prod-hosts /etc/ansible/production-playbook.yml'" '''
                 }
             }
         }
