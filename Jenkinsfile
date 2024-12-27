@@ -40,7 +40,7 @@ pipeline{
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $NEXUS_REPO/myapp .'
+                sh 'docker build -t $NEXUS_REPO/petclinicapps .'
             }
         }
         stage('Push Artifact to Nexus Repo') {
